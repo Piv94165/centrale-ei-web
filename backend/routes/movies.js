@@ -22,6 +22,10 @@ router.post("/new", async function (req, res) {
       description: req.body.description,
       url: req.body.url,
       viewers: req.body.viewers,
+      date: req.body.date,
+      genre: req.body.genre,
+      popularity: req.body.popularity,
+      runtime: req.body.runtime,
     });
     // Save the movie in database
     const createdMovie = await newMovie.save();

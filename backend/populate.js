@@ -1,16 +1,26 @@
 const mongoose = require("mongoose");
-const MovieModel = require("./models/movie");
+const MovieModel = require("./models/movies");
+const axios = require("axios");
 
 async function fetchMoviesFromTheMovieDatabase() {
   // TODO: fetch movies from the The Movie Database API
+  const results = await axios.get(
+    `https://api.themoviedb.org/3/movie/popular?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&language=en-US&page=1`
+  );
+
+  return results.data.results;
 }
 
-async function populateMovies() {
+async function populateMovies(movies) {
   // TODO: populate movies into the database
-}
-
-async function dropDataBase() {
-  // TODO: Drop the collections
+  for (const movie of movies) {
+    const newMovie = new MovieModel({
+      // Movie attributes
+      title: movie.title,
+    });
+    // Save the movie in database
+    await newMovie.save();
+  }
 }
 
 async function populate() {
@@ -19,7 +29,9 @@ async function populate() {
 
   const movies = await fetchMoviesFromTheMovieDatabase();
 
-  await dropDataBase();
+  const connection = mongoose.connection;
+
+  await connection.db.dropCollection("movies");
 
   await populateMovies(movies);
 

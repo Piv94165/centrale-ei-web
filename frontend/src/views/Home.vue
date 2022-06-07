@@ -3,16 +3,18 @@
     <img alt="Vue logo" src="../assets/logo.png" />
     <h1>Welcome to my App</h1>
     <div class="titre_carousel">Vos recommandations</div>
-    <Carousel_movie :palmares_type = 'popularity' />
+    <Carousel_movie :palmares_type="popularity" />
     <input type="text" v-model="movieName" />
-    <div><span>Mon film: {{ movieName }}</span></div>
-    <ul style="list-style-type:circle">
-      <li v-for="movie in movies" v-bind:key= movie.id>
+    <div>
+      <span>Mon film: {{ movieName }}</span>
+    </div>
+    <ul style="list-style-type: circle">
+      <li v-for="movie in movies" v-bind:key="movie.id">
         {{ movie.original_title }}
       </li>
     </ul>
     <div class="grid">
-      <Movie v-for="movie in movies" v-bind:key= movie.id :movie = movie />
+      <Movie v-for="movie in movies" v-bind:key="movie.id" :movie="movie" />
     </div>
     <p>
       For a guide and recipes on how to configure / customize this project,<br />
@@ -91,27 +93,30 @@
 <script>
 import axios from "axios";
 import Movie from "@/components/Movie.vue";
-import 'vue3-carousel/dist/carousel.css';
+import "vue3-carousel/dist/carousel.css";
 import Carousel_movie from "../components/Carousel_movie.vue";
 
 export default {
   name: "Home",
   components: {
     Movie,
-    Carousel_movie
+    Carousel_movie,
   },
   data: function () {
     return {
-      movieName: '',
-      movies: []
-    }},
+      movieName: "",
+      movies: [],
+    };
+  },
   methods: {
     fetchMovies: function () {
       axios
-        .get(`https://api.themoviedb.org/3/movie/popular?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&language=en-US&page=1`)
+        .get(
+          `https://api.themoviedb.org/3/movie/popular?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&language=en-US&page=1`
+        )
         .then((response) => {
           this.movies = response.data.results;
-          console.log(type(movies[0]))
+          console.log(type(movies[0]));
         })
         .catch((error) => {
           this.usersLoadingError = "An error occured while fetching users.";
@@ -120,10 +125,9 @@ export default {
     },
   },
 
-  created: function() {
-    this.fetchMovies()
-  }
-  
+  created: function () {
+    this.fetchMovies();
+  },
 };
 </script>
 
