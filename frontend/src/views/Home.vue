@@ -2,7 +2,7 @@
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png" />
     <h1>Welcome to my App</h1>
-    <Carousel_movie  />
+    <Carousel_movie :palmares_type = 'popularity' />
     <input type="text" v-model="movieName" />
     <div><span>Mon film: {{ movieName }}</span></div>
     <ul style="list-style-type:circle">

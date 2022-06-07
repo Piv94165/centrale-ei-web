@@ -1,9 +1,9 @@
 <template>
     <div>
         <img :src= "'https://image.tmdb.org/t/p/w200' + movie.poster_path" :alt = movie.original_title />
-        <p>
+        <!-- <p>
             {{movie.original_title}} ({{movie.release_date}})
-        </p>
+        </p> -->
     </div>
     
 </template>
