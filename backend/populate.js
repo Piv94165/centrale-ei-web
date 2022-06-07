@@ -4,9 +4,15 @@ const axios = require("axios");
 
 async function fetchMoviesFromTheMovieDatabase() {
   // TODO: fetch movies from the The Movie Database API
-  const results = await axios.get(
-    `https://api.themoviedb.org/3/movie/popular?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&language=en-US&page=1`
-  );
+  //   const results = await axios.get(
+  //     `https://api.themoviedb.org/3/movie/popular?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&language=en-US&page=1`
+  //   );
+  for (let i; i < 21; i++) {
+    console.log(i);
+    const results = await axios.get(
+      "'https://api.themoviedb.org/3/movie/now_playing?api_key=522d421671cf75c2cba341597d86403a&page='+i"
+    );
+  }
 
   return results.data.results;
 }
@@ -17,6 +23,13 @@ async function populateMovies(movies) {
     const newMovie = new MovieModel({
       // Movie attributes
       title: movie.title,
+      description: movie.description,
+      url: movie.url,
+      viewers: movie.viewers,
+      date: movie.date,
+      genre: movie.genre,
+      popularity: movie.popularity,
+      runtime: movie.runtime,
     });
     // Save the movie in database
     await newMovie.save();
