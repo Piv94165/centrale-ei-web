@@ -2,6 +2,7 @@
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png" />
     <h1>Welcome to my App</h1>
+    <div class="titre_carousel">Vos recommandations</div>
     <Carousel_movie :palmares_type = 'popularity' />
     <input type="text" v-model="movieName" />
     <div><span>Mon film: {{ movieName }}</span></div>
@@ -91,7 +92,7 @@
 import axios from "axios";
 import Movie from "@/components/Movie.vue";
 import 'vue3-carousel/dist/carousel.css';
-import Carousel_movie from "@/components/Carousel_movie.vue";
+import Carousel_movie from "../components/Carousel_movie.vue";
 
 export default {
   name: "Home",
@@ -154,5 +155,10 @@ li {
 
 a {
   color: #42b983;
+}
+
+.titre_carousel {
+  font-size: 15px;
+  justify-content: left;
 }
 </style>

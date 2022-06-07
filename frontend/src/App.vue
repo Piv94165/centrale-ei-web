@@ -3,7 +3,7 @@
     <div class = "banniere">
     <img class = "logo" src="./assets/logo_test.jpg" alt="logo test">
     <div class = "banniere_centre">
-      PAM
+      MAP
       <div class="nav">
       <router-link class="nav-link" to="/">Home</router-link> 
       <router-link class="nav-link" to="/counter">Counter</router-link> 
