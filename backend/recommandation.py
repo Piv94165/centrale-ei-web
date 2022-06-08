@@ -1,16 +1,17 @@
 from pymongo import MongoClient
+from collections import OrderedDict
 
-myclient = MongoClient('mongodb://group1:BZQb6y8mLUfYd4nw@cs2022.lmichelin.fr:27017/group1?ssl=true')
 
-# myclient = MongoClient(
-#     "mongodb://group1:BZQb6y8mLUfYd4nw@cs2022.lmichelin.fr:27017/group1?ssl=true")
-mydb = myclient["group1"]
-mycol = mydb["movies"]
+def find_ratings_of_a_user(id_user):
+    #Connexion à la base de données MongoDB
+    myclient = MongoClient('mongodb://group1:BZQb6y8mLUfYd4nw@cs2022.lmichelin.fr:27017/group1?ssl=true')
 
-myquery = {"title": "Fantastic Beasts: The Secrets of Dumbledore"}
+    #Récupération de la base de données
+    mydb = myclient["group1"]
+    #Récupération de la table Ratings
+    mycol = mydb["ratings"]
 
-mydoc = mycol.find(myquery)
-mydoc = mycol.find(myquery)
-
-for x in mydoc:
-    print(x)
+    myquery = {"id_user": id_user}
+    #Liste des films notés par l'utilisateur id_user
+    mydoc = mycol.find(myquery)
+    
