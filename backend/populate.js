@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const MovieModel = require("./models/movies");
+const CastingModel = require("./models/castings");
+const ActorModel = require("./models/actors");
 const axios = require("axios");
 
 async function fetchMoviesFromTheMovieDatabase() {
@@ -8,13 +10,28 @@ async function fetchMoviesFromTheMovieDatabase() {
   //     `https://api.themoviedb.org/3/movie/popular?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&language=en-US&page=1`
   //   );
   let db_movies = [];
-  for (let i = 1; i < 21; i++) {
+  for (let i = 1; i < 2; i++) {
     const results = await axios.get(
       `https://api.themoviedb.org/3/movie/now_playing?api_key=522d421671cf75c2cba341597d86403a&page=${i}`
     );
     db_movies = db_movies.concat(results.data.results);
   }
   return db_movies;
+}
+
+async function fetchActorsByMovieId(id_movie) {
+  // TODO: fetch movies from the The Movie Database API
+  //   const results = await axios.get(
+  //     `https://api.themoviedb.org/3/movie/popular?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&language=en-US&page=1`
+  //   );
+  const results = axios
+    .get(
+      `http://api.themoviedb.org/3/movie/${id_movie}/casts?api_key=522d421671cf75c2cba341597d86403a`
+    )
+    .then((result) => {
+      return result.data.cast;
+    });
+  return results;
 }
 
 async function populateMovies(movies) {
@@ -31,10 +48,47 @@ async function populateMovies(movies) {
       popularity: movie.popularity,
       runtime: movie.runtime,
     });
+    const casting = await fetchActorsByMovieId(movie.id);
     // Save the movie in database
-    await newMovie.save();
+    let id_movie = await MovieModel.findOne({ title: movie.title });
+    console.log("id_movie =" + id_movie);
+    if (id_movie == null) {
+      id_movie = await newMovie.save();
+    }
+
+    console.log(id_movie.id);
+    // for (const actor of casting) {
+    //   const newActor = new ActorModel({
+    //     name: actor.name,
+    //     popularity: actor.popularity,
+    //     profile_path: actor.profile_path,
+    //   });
+    //   // const id_actor = await newActor.updateOne({name: actor.name}, {"id_movie": movie["id_movie"], "id_user": movie["id_user"], "score": movie["rating"]}, True)
+    //   const id_actor = await newActor.save();
+    // const newCasting = new CastingModel({
+    //   id_actor: id
+    // })
+    // }
   }
 }
+
+// async function fetchActorsFromTheMovieDatabase() {
+//   // TODO: fetch movies from the The Movie Database API
+//   //   const results = await axios.get(
+//   //     `https://api.themoviedb.org/3/movie/popular?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&language=en-US&page=1`
+//   //   );
+
+//   const newCasting = new CastingModel({
+//     // Rating attributes
+//     id_movie: req.params["id"],
+//     id_user: id_user,
+//     rating: req.body.rating,
+//   });
+//   // Save the movie in database
+//   const createdRating = await newRating.save();
+//   }
+//   return ;
+// }
 
 async function populate() {
   // Connect mongoose client

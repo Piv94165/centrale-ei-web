@@ -1,4 +1,5 @@
 from pymongo import MongoClient
+from bson.objectid import ObjectId
 from collections import OrderedDict
 
 
@@ -8,10 +9,18 @@ def find_ratings_of_a_user(id_user):
 
     #Récupération de la base de données
     mydb = myclient["group1"]
-    #Récupération de la table Ratings
-    mycol = mydb["ratings"]
+    #Récupération de la table Ratings et Scores
+    myratings = mydb["ratings"]
+    myscores = mydb["scores"]
 
-    myquery = {"id_user": id_user}
+    myquery = {"id_user": ObjectId(id_user)}
     #Liste des films notés par l'utilisateur id_user
-    mydoc = mycol.find(myquery)
+    mydoc = myratings.find(myquery)
+    for movie in mydoc:
+        x = myscores.update_one({"id_movie": movie["id_movie"], "id_user": movie["id_user"]}, {"$set":{"id_movie": movie["id_movie"], "id_user": movie["id_user"], "score": movie["rating"]}}, True)
+        
+        # coll.update(key, data, upsert=True)
+        print(x)
     
+
+find_ratings_of_a_user("629f485825c978cfea8b715b")
