@@ -2,50 +2,49 @@ const express = require("express");
 const router = express.Router();
 const RatingModel = require("../models/ratings");
 module.exports = router;
+const id_user = "629f485825c978cfea8b715b";
 
-router.get("/onemovie/:id", async function (req, res) {
+router.get("/:id", async function (req, res) {
   try {
     const id_movie = req.params["id"];
-    const id_user = req.body.id_user;
     const rating = await RatingModel.findOne({
       id_user: id_user,
       id_movie: id_movie,
     });
-    res.send(rating);
+    res.send(rating["rating"]);
     console.log(rating);
   } catch (error) {
     console.log(error);
   }
 });
 
-router.get("/", async function (req, res) {
-  try {
-    const id_movie = req.body.id_movie;
-    const id_user = req.body.id_user;
-    const rating = await RatingModel.findOne({
-      id_user: id_user,
-      id_movie: id_movie,
-    });
-    res.send(rating);
-    console.log(rating);
-  } catch (error) {
-    console.log(error);
-  }
-});
+// router.get("/", async function (req, res) {
+//   try {
+//     const id_movie = req.body.id_movie;
+//     const rating = await RatingModel.findOne({
+//       id_user: id_user,
+//       id_movie: id_movie,
+//     });
+//     res.send(rating);
+//     console.log(rating);
+//   } catch (error) {
+//     console.log(error);
+//   }
+// });
 
-router.post("/onemovie/:id", async function (req, res) {
+router.post("/:id", async function (req, res) {
   // Your code !
   // Create a new rating instance
   try {
     const newRating = new RatingModel({
       // Rating attributes
       id_movie: req.params["id"],
-      id_user: req.body.id_user,
+      id_user: id_user,
       rating: req.body.rating,
     });
     // Save the movie in database
     const createdRating = await newRating.save();
-    res.send(createdRating);
+    res.send("ok");
   } catch (error) {
     // What to do if there was an error !
     console.error(error);
@@ -59,19 +58,19 @@ router.post("/onemovie/:id", async function (req, res) {
   }
 });
 
-router.put("/onemovie/:id", async function (req, res) {
+router.put("/:id", async function (req, res) {
   // La syntaxe :id veut simplement dire que cette route est dynamique et que la partie :id sera enfaite remplacée par l’id du film stocké en base de données.
   try {
     const newDoc = await RatingModel.findOneAndUpdate(
-      { _id: req.params["id"] },
+      { id_user: id_user, id_movie: req.params["id"] },
       {
         id_movie: req.params["id"],
-        id_user: req.body.id_user,
+        id_user: id_user,
         rating: req.body.rating,
       },
       { new: true }
     );
-    res.send(newDoc);
+    res.send("ok");
     console.log(newDoc);
   } catch (error) {
     console.log(error);
