@@ -1,10 +1,11 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <h1>Welcome to my App</h1>
-    <div class="titre_carousel">Vos recommandations</div>
+    <!-- <img alt="Vue logo" src="../assets/logo.png" /> -->
+    <h1>Relax and Enjoy !</h1>
+    <!-- <div class="titre_carousel">Your Suggestions</div> -->
     <Carousel_movie palmares_type="popularity" />
     <Carousel_movie palmares_type="upcoming" />
+    <Carousel_movie palmares_type="toprated" />
     <input type="text" v-model="movieName" />
     <div>
       <span>Mon film: {{ movieName }}</span>
@@ -17,12 +18,12 @@
     <div class="grid">
       <Movie v-for="movie in movies" v-bind:key="movie.id" :movie="movie" />
     </div>
-    <p>
+    <!-- <p>
       For a guide and recipes on how to configure / customize this project,<br />
       check out the
       <a href="https://cli.vuejs.org" target="_blank">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
+    </p> -->
+    <!-- <h3>Installed CLI Plugins</h3>
     <ul>
       <li>
         <a
@@ -44,8 +45,8 @@
           target="_blank"
           >eslint</a
         >
-      </li>
-    </ul>
+      </li> -->
+    <!-- </ul>
     <h3>Essential Links</h3>
     <ul>
       <li>
@@ -63,9 +64,9 @@
       <li>
         <a href="https://news.vuejs.org" target="_blank">News</a>
       </li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
+    </ul> -->
+    <!-- <h3>Ecosystem</h3> -->
+    <!-- <ul>
       <li>
         <a href="https://router.vuejs.org" target="_blank">vue-router</a>
       </li>
@@ -87,7 +88,7 @@
           >awesome-vue</a
         >
       </li>
-    </ul>
+    </ul> -->
   </div>
 </template>
 
@@ -164,6 +165,6 @@ a {
 
 .titre_carousel {
   font-size: 15px;
-  justify-content: left;
+  justify-content: center;
 }
 </style>

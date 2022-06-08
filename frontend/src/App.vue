@@ -1,32 +1,44 @@
 <template>
   <div>
     <div class="banniere">
-      <img class="logo" src="./assets/logo_test.jpg" alt="logo test" />
+      <img
+        class="logo"
+        src="./assets/test2.png"
+        alt="logo test"
+        width="100"
+        height="100"
+      />
       <div class="banniere_centre">
         MAP
         <div class="nav">
           <router-link class="nav-link" to="/">Home</router-link>
-          <router-link class="nav-link" to="/counter">Counter</router-link>
-          <router-link class="nav-link" to="/users">Users</router-link>
+          <router-link class="nav-link" to="/counter">Movies</router-link>
+          <router-link class="nav-link" to="/users">Preferences</router-link>
           <router-link class="nav-link" to="/about">About</router-link>
         </div>
       </div>
-      <img class="pp" src="./assets/logo_test.jpg" alt="logo test" />
+      <img
+        class="pp"
+        src="./assets/pngegg.png"
+        alt="logo test"
+        width="100"
+        height="100"
+      />
     </div>
     <router-view />
   </div>
 </template>
 
 <style scoped>
-@import url(//fonts.googleapis.com/css?family=Blaka);
+@import url(//fonts.googleapis.com/css?family=Lobster);
 @import url(//fonts.googleapis.com/css?family=Pacifico);
 
 .banniere {
-  --logo_size: 200px;
-  --pp_size: 200px;
+  --logo_size: auto;
+  --pp_size: auto;
   display: flex;
   flex-wrap: wrap;
-  background: linear-gradient(to right, rgba(255, 191, 0, 0.794), pink);
+  background: rgba(201, 157, 136, 255);
 }
 
 .banniere_centre {
@@ -36,25 +48,25 @@
   justify-content: space-between;
   width: calc(100% - var(--logo_size) - var(--pp_size));
   margin-top: 10px;
-  font-size: 50pt;
+  font-size: 30pt;
 }
 
 .nav {
-  text-align: left;
+  text-align: center;
   padding: 10px;
-  align-self: flex-start;
-  font-size: 15pt;
+  align-self: center;
+  font-size: 20pt;
   /* margin-bottom: 10px; */
 }
 
 .nav-link {
   font-weight: bold;
-  color: #2c3e50;
+  color: rgba(161, 122, 118, 255);
   margin: 20px;
 }
 
 .nav-link.router-link-exact-active {
-  color: #42b983;
+  color: #2c3e50;
 }
 
 .nav a {
@@ -63,12 +75,12 @@
 
 .logo {
   width: var(--logo_size);
-  margin: 0px;
+  margin-left: 10px;
 }
 
 .pp {
   width: var(--pp_size);
-  margin: 0px;
+  margin: 10px;
   justify-self: flex-end;
 }
 </style>

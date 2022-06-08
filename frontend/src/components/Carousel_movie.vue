@@ -47,14 +47,19 @@ export default {
       let url = "";
       switch (this.palmares_type) {
         case "popularity":
-          this.title = "Les populaires";
+          this.title = "Popular";
           url =
             "https://api.themoviedb.org/3/movie/popular?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&language=en-US&page=1";
           break;
         case "upcoming":
-          this.title = "A venir";
+          this.title = "Upcoming";
           url =
             "https://api.themoviedb.org/3/movie/upcoming?api_key=522d421671cf75c2cba341597d86403a&language=en-US";
+          break;
+        case "toprated":
+          this.title = "Top Rated";
+          url =
+            "https://api.themoviedb.org/3/movie/top_rated?api_key=a0a7e40dc8162ed7e37aa2fc97db5654&language=en-US&page=1";
           break;
         default:
       }
@@ -98,7 +103,11 @@ export default {
 }
 
 .titre_carousel {
-  font-size: 30px;
-  text-align: left;
+  font-size: 20px;
+  font-weight: bold;
+  /* font-style: italic; */
+  text-align: center;
+  margin-left: 10px;
+  margin-bottom: 20px;
 }
 </style>
