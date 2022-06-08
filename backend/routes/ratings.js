@@ -5,7 +5,7 @@ module.exports = router;
 
 router.get("/onemovie/:id", async function (req, res) {
   try {
-    const id_movie = req.params;
+    const id_movie = req.params["id"];
     const id_user = req.body.id_user;
     const rating = await RatingModel.findOne({
       id_user: id_user,
@@ -35,17 +35,17 @@ router.get("/", async function (req, res) {
 
 router.post("/onemovie/:id", async function (req, res) {
   // Your code !
-  // Create a new movie instance
+  // Create a new rating instance
   try {
     const newRating = new RatingModel({
       // Rating attributes
-      id_movie: req.params,
+      id_movie: req.params["id"],
       id_user: req.body.id_user,
       rating: req.body.rating,
     });
     // Save the movie in database
     const createdRating = await newRating.save();
-    res.send(createdMovie);
+    res.send(createdRating);
   } catch (error) {
     // What to do if there was an error !
     console.error(error);
@@ -59,22 +59,19 @@ router.post("/onemovie/:id", async function (req, res) {
   }
 });
 
-router.put("/:id", async function (req, res) {
+router.put("/onemovie/:id", async function (req, res) {
   // La syntaxe :id veut simplement dire que cette route est dynamique et que la partie :id sera enfaite remplacée par l’id du film stocké en base de données.
   try {
-    console.log(req.params);
-    const id_movie = req.params["id"];
     const newDoc = await RatingModel.findOneAndUpdate(
-      { _id: id_movie },
+      { _id: req.params["id"] },
       {
-        title: req.body.title,
-        description: req.body.description,
-        url: req.body.url,
-        viewers: req.body.viewers,
+        id_movie: req.params["id"],
+        id_user: req.body.id_user,
+        rating: req.body.rating,
       },
       { new: true }
     );
-    res.send([]);
+    res.send(newDoc);
     console.log(newDoc);
   } catch (error) {
     console.log(error);

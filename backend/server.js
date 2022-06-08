@@ -5,6 +5,9 @@ const mongoose = require("mongoose");
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const moviesRouter = require("./routes/movies");
+const ratingsRouter = require("./routes/movies");
+const scoresRouter = require("./routes/scores");
+
 const routeNotFoundJsonHandler = require("./services/routeNotFoundJsonHandler");
 const jsonErrorHandler = require("./services/jsonErrorHandler");
 
@@ -21,6 +24,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/movies", moviesRouter);
+app.use("/ratings", ratingsRouter);
+app.use("/scores", ratingsRouter);
 
 // Register 404 middleware and error handler
 app.use(routeNotFoundJsonHandler); // this middleware must be registered after all routes to handle 404 correctly
