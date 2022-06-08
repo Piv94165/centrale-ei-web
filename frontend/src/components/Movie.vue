@@ -1,11 +1,13 @@
 <template>
-    <div>
-        <img :src= "'https://image.tmdb.org/t/p/w200' + movie.poster_path" :alt = movie.original_title />
-        <!-- <p>
+  <a :href="'/onemovie/' + movie.id">
+    <img
+      :src="'https://image.tmdb.org/t/p/w200' + movie.poster_path"
+      :alt="movie.original_title"
+    />
+    <!-- <p>
             {{movie.original_title}} ({{movie.release_date}})
         </p> -->
-    </div>
-    
+  </a>
 </template>
 
 <script>
@@ -13,26 +15,22 @@ import axios from "axios";
 
 export default {
   name: "Movie",
-  url_img : '',
+  url_img: "",
   props: {
-    movie : Array
+    movie: Array,
   },
 };
 </script>
 
 <style scoped>
-
 @import url(//fonts.googleapis.com/css?family=Blaka);
 
-
-
 p {
-    width : 200px;
-    font-family: 'Blaka';
+  width: 200px;
+  font-family: "Blaka";
 }
 
 div {
-    margin-left: 10px;
+  margin-left: 10px;
 }
-
 </style>

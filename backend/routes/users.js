@@ -8,6 +8,21 @@ router.get("/", function (req, res) {
   });
 });
 
+router.get("/:id/movies", async function (req, res) {
+  try {
+    console.log(req.params);
+    const id_user = req.params["id"];
+    // const userId = await UserModel.findOne({ _id: id_user });
+    const user = await UserModel.findOne({
+      _id: id_user,
+    }).populate("watchedMovies");
+    res.send(user);
+    console.log(user);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 router.post("/new", function (req, res) {
   const newUser = new UserModel({
     email: req.body.email,

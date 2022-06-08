@@ -1,35 +1,32 @@
 <template>
   <div>
-    <div class = "banniere">
-    <img class = "logo" src="./assets/logo_test.jpg" alt="logo test">
-    <div class = "banniere_centre">
-      PAM
-      <div class="nav">
-      <router-link class="nav-link" to="/">Home</router-link> 
-      <router-link class="nav-link" to="/counter">Counter</router-link> 
-      <router-link class="nav-link" to="/users">Users</router-link> 
-      <router-link class="nav-link" to="/about">About</router-link>
+    <div class="banniere">
+      <img class="logo" src="./assets/logo_test.jpg" alt="logo test" />
+      <div class="banniere_centre">
+        MAP
+        <div class="nav">
+          <router-link class="nav-link" to="/">Home</router-link>
+          <router-link class="nav-link" to="/counter">Counter</router-link>
+          <router-link class="nav-link" to="/users">Users</router-link>
+          <router-link class="nav-link" to="/about">About</router-link>
+        </div>
       </div>
-    </div>
-    <img class = "pp" src="./assets/logo_test.jpg" alt="logo test">
+      <img class="pp" src="./assets/logo_test.jpg" alt="logo test" />
     </div>
     <router-view />
-
   </div>
-  
 </template>
 
 <style scoped>
-
 @import url(//fonts.googleapis.com/css?family=Blaka);
 @import url(//fonts.googleapis.com/css?family=Pacifico);
 
 .banniere {
-  --logo_size : 200px;
-  --pp_size : 200px;
+  --logo_size: 200px;
+  --pp_size: 200px;
   display: flex;
   flex-wrap: wrap;
-  background: linear-gradient(to right,rgba(255, 191, 0, 0.794), pink);
+  background: linear-gradient(to right, rgba(255, 191, 0, 0.794), pink);
 }
 
 .banniere_centre {
@@ -42,14 +39,12 @@
   font-size: 50pt;
 }
 
-
 .nav {
   text-align: left;
   padding: 10px;
   align-self: flex-start;
   font-size: 15pt;
   /* margin-bottom: 10px; */
-
 }
 
 .nav-link {
@@ -76,5 +71,4 @@
   margin: 0px;
   justify-self: flex-end;
 }
-
 </style>

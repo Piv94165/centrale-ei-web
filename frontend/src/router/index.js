@@ -3,6 +3,7 @@ import Home from "../views/Home.vue";
 import Counter from "../views/Counter.vue";
 import Users from "../views/Users.vue";
 import About from "../views/About.vue";
+import OneMovie from "../views/OneMovie.vue";
 
 const routes = [
   {
@@ -24,6 +25,11 @@ const routes = [
     path: "/about",
     name: "About",
     component: About,
+  },
+  {
+    path: "/onemovie/:id",
+    name: "Onemovie",
+    component: OneMovie,
   },
 ];
 
