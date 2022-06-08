@@ -18,9 +18,9 @@ router.get("/onemovie/:id", async function (req, res) {
   }
 });
 
-router.get("/:id", async function (req, res) {
+router.get("/", async function (req, res) {
   try {
-    const id_movie = req.params;
+    const id_movie = req.body.id_movie;
     const id_user = req.body.id_user;
     const rating = await RatingModel.findOne({
       id_user: id_user,
@@ -33,23 +33,18 @@ router.get("/:id", async function (req, res) {
   }
 });
 
-router.post("/new", async function (req, res) {
+router.post("/onemovie/:id", async function (req, res) {
   // Your code !
   // Create a new movie instance
   try {
-    const newMovie = new RatingModel({
-      // Movie attributes
-      title: req.body.title,
-      description: req.body.description,
-      url: req.body.url,
-      viewers: req.body.viewers,
-      date: req.body.date,
-      genre: req.body.genre,
-      popularity: req.body.popularity,
-      runtime: req.body.runtime,
+    const newRating = new RatingModel({
+      // Rating attributes
+      id_movie: req.params,
+      id_user: req.body.id_user,
+      rating: req.body.rating,
     });
     // Save the movie in database
-    const createdMovie = await newMovie.save();
+    const createdRating = await newRating.save();
     res.send(createdMovie);
   } catch (error) {
     // What to do if there was an error !
