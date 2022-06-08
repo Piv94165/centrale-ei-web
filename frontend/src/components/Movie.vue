@@ -1,5 +1,6 @@
 <template>
   <a :href="'/onemovie/' + movie.id">
+    <!-- rooter link to au lieu de href -->
     <img
       :src="'https://image.tmdb.org/t/p/w200' + movie.poster_path"
       :alt="movie.original_title"

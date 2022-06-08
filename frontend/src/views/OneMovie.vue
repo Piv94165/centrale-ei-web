@@ -1,46 +1,56 @@
 <template>
+
   <h1> {{ movie.title}}</h1>    
-  <div class ="image">
-    <a :href="'/onemovie/' + movie.id">
-      <img
-      :src="'https://image.tmdb.org/t/p/w400' + movie.poster_path"
-      :alt="movie.original_title"
-      />
-    <!-- <p>
-            {{movie.original_title}} ({{movie.release_date}})
-        </p> -->
-    </a>
+    <div class ="image">
+      <a :href="'/onemovie/' + movie.id">
+        <img
+        :src="'https://image.tmdb.org/t/p/w400' + movie.poster_path"
+        :alt="movie.original_title"
+        />
+      <!-- <p>
+              {{movie.original_title}} ({{movie.release_date}})
+          </p> -->
+      </a>
+    </div>
+
+    
+
+    <div class ="special">
+    <p>
+      <h2> Vote Average: {{movie.vote_average}}/10 </h2>
+    </p>
+    </div>
+
+    
+
+    <p>
+      <h2>Release Date: {{movie.release_date}}</h2>
+    </p>
+
+    <p>
+      <h2> Overview: </h2> <li> {{movie.overview}} </li>
+    </p>
+
+    <p>
+      <h2> Original Language: {{movie.original_language}} </h2>
+    </p>
+
+    <p>
+      <h2> Genres: </h2>
+      <Genres :genres="movie.genres"></Genres>
+      <!-- <li> {{movie.genres[0].name}}</li>
+      <li> {{movie.genres[1].name}}</li>
+      <li> {{movie.genres[2].name}}</li> -->
+    </p>
+
+
+  <div class="recommandation">
+    <h2>The Recommend Movies: </h2>
+    <Carousel_movie palmares_type="popularity" />
   </div>
 
-  <div class ="special">
-  <p>
-    <h2> Vote Average: {{movie.vote_average}}/10 </h2>
-  </p>
-  </div>
 
-  <p>
-    <h2>Release Date: {{movie.release_date}}</h2>
-  </p>
-
-  <p>
-     <h2> Overview: </h2> <li> {{movie.overview}} </li>
-  </p>
-
-  <p>
-    <h2> Original Language: {{movie.original_language}} </h2>
-  </p>
-
-  <p>
-    <h2> Genres: </h2>
-    <li> {{movie.genres[0].name}}</li>
-    <li> {{movie.genres[1].name}}</li>
-    <li> {{movie.genres[2].name}}</li>
-  </p>
-
-<div class="recommandation">
-  <h2>The Recommend Movies: </h2>
-  <Carousel_movie palmares_type="popularity" />
-</div>
+  
 
 </template>
 
@@ -48,6 +58,7 @@
 import axios from "axios";
 import "vue3-carousel/dist/carousel.css";
 import Carousel_movie from "@/components/Carousel_movie.vue";
+import Genres from "@/components/Genres.vue";
 // import StarRating from 'vue-star-rating'
 
 export default {
@@ -58,7 +69,8 @@ export default {
   //     Carousel_movie,
   //   },
   components: {
-    Carousel_movie, 
+    Carousel_movie,
+    Genres, 
     // StarRating
   },
   data: function () {
@@ -142,6 +154,10 @@ li {
   border-radius: 5px;
   color: #999;
   background: #fff;
+}
+
+.review {
+  margin-left: 10px;
 }
 
 </style>
