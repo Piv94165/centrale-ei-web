@@ -9,7 +9,7 @@ const CastingsSchema = new mongoose.Schema({
 const CastingsModel = mongoose.model(
   "CastingsModel",
   CastingsSchema,
-  "castingss"
+  "castings"
 );
 
 module.exports = CastingsModel;

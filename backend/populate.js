@@ -24,51 +24,98 @@ async function fetchActorsByMovieId(id_movie) {
   //   const results = await axios.get(
   //     `https://api.themoviedb.org/3/movie/popular?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&language=en-US&page=1`
   //   );
-  const results = axios
-    .get(
-      `http://api.themoviedb.org/3/movie/${id_movie}/casts?api_key=522d421671cf75c2cba341597d86403a`
-    )
-    .then((result) => {
-      return result.data.cast;
-    });
-  return results;
+  const results = await axios.get(
+    `http://api.themoviedb.org/3/movie/${id_movie}/casts?api_key=522d421671cf75c2cba341597d86403a`
+  );
+  return results.data.cast;
+}
+
+async function fetchGenres() {
+  const response = await axios.get(
+    "https://api.themoviedb.org/3/genre/movie/list?api_key=a0a7e40dc8162ed7e37aa2fc97db5654&language=en-US"
+  );
+  const genres = {};
+  for (const genre of response.data.genres) {
+    genres[genre.id] = genre.name;
+  }
+  return genres;
 }
 
 async function populateMovies(movies) {
   // TODO: populate movies into the database
+  const genres = await fetchGenres();
+
   for (const movie of movies) {
     const newMovie = new MovieModel({
       // Movie attributes
       title: movie.title,
-      description: movie.description,
-      url: movie.url,
+      description: movie.overview,
+      url: movie.poster_path,
       viewers: movie.viewers,
-      date: movie.date,
-      genre: movie.genre,
+      date: movie.release_date,
+      genre: movie.genre_ids.map((genre) => genres[genre]),
       popularity: movie.popularity,
-      runtime: movie.runtime,
+      // runtime: movie.runtime,
     });
+
+    const createdMovie = await newMovie.save();
     const casting = await fetchActorsByMovieId(movie.id);
     // Save the movie in database
-    let id_movie = await MovieModel.findOne({ title: movie.title });
-    console.log("id_movie =" + id_movie);
-    if (id_movie == null) {
-      id_movie = await newMovie.save();
-    }
-
-    console.log(id_movie.id);
-    // for (const actor of casting) {
-    //   const newActor = new ActorModel({
-    //     name: actor.name,
-    //     popularity: actor.popularity,
-    //     profile_path: actor.profile_path,
-    //   });
-    //   // const id_actor = await newActor.updateOne({name: actor.name}, {"id_movie": movie["id_movie"], "id_user": movie["id_user"], "score": movie["rating"]}, True)
-    //   const id_actor = await newActor.save();
-    // const newCasting = new CastingModel({
-    //   id_actor: id
-    // })
+    // let id_movie = await MovieModel.findOne({ title: movie.title });
+    // console.log("id_movie =" + id_movie);
+    // if (id_movie == null) {
+    //   id_movie = await newMovie.save();
     // }
+
+    // console.log(id_movie.id);
+    // MovieModel.findOneAndUpdate(
+    //   { title: movie.title },
+    //   newMovie,
+    //   { upsert: true },
+    //   function (error, result) {
+    //     if (!error) {
+    //       // If the document doesn't exist
+    //       if (!result) {
+    //         // Create it
+    //         result = newMovie; //MovieModel();
+    //       }
+    //       // Save the document
+    //       result.save(function (error) {
+    //         if (!error) {
+    //           // Do something with the document
+    //         } else {
+    //           throw error;
+    //         }
+    //       });
+    //     }
+    //   }
+    // );
+    for (const actor of casting) {
+      const newActor = new ActorModel({
+        name: actor.name,
+        popularity: actor.popularity,
+        profile_path: actor.profile_path,
+      });
+
+      const existingActor = await ActorModel.findOne({ name: actor.name });
+
+      if (existingActor === null) {
+        const createdActor = await newActor.save();
+        const newCasting = new CastingModel({
+          id_actor: createdActor._id,
+          id_movie: createdMovie._id,
+          order: 0,
+        });
+        const createdCasting = await newCasting.save();
+      } else {
+        const newCasting = new CastingModel({
+          id_actor: existingActor._id,
+          id_movie: createdMovie._id,
+          order: 0,
+        });
+        const createdCasting = await newCasting.save();
+      }
+    }
   }
 }
 
@@ -96,6 +143,10 @@ async function populate() {
   const movies = await fetchMoviesFromTheMovieDatabase();
   const connection = mongoose.connection;
   await connection.db.dropCollection("movies");
+  await connection.db.dropCollection("actors");
+  await connection.db.dropCollection("castings");
+  await connection.db.dropCollection("ratings");
+  // await connection.db.dropCollection("scores");
 
   await populateMovies(movies);
 
