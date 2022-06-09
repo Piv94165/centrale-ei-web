@@ -61,6 +61,11 @@ export default {
           url =
             "https://api.themoviedb.org/3/movie/top_rated?api_key=a0a7e40dc8162ed7e37aa2fc97db5654&language=en-US&page=1";
           break;
+        case "nowplaying":
+          this.title = "Now Playing";
+          url =
+            "https://api.themoviedb.org/3/movie/now_playing?api_key=522d421671cf75c2cba341597d86403a&language=en-US&page=1";
+          break;
         default:
       }
       axios

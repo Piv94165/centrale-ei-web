@@ -6,6 +6,7 @@
     <Carousel_movie palmares_type="popularity" />
     <Carousel_movie palmares_type="upcoming" />
     <Carousel_movie palmares_type="toprated" />
+    <Carousel_movie palmares_type="nowplaying" />
     <input type="text" v-model="movieName" />
     <div>
       <span>Mon film: {{ movieName }}</span>

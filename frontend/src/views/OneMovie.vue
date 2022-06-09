@@ -13,15 +13,17 @@
       </a>
     </div>
 
-    
-
     <div class ="special">
     <p>
       <h2> Vote Average: {{movie.vote_average}}/10 </h2>
     </p>
     </div>
 
-    
+  <StarRating v-model:rating="rating"
+  v-bind:increment="0.5"
+             v-bind:maxRating="3"
+             v-bind:starSize="90">
+  </StarRating>
 
     <p>
       <h2>Release Date: {{movie.release_date}}</h2>
@@ -38,9 +40,6 @@
     <p>
       <h2> Genres: </h2>
       <Genres :genres="movie.genres"></Genres>
-      <!-- <li> {{movie.genres[0].name}}</li>
-      <li> {{movie.genres[1].name}}</li>
-      <li> {{movie.genres[2].name}}</li> -->
     </p>
 
 
@@ -49,9 +48,6 @@
     <Carousel_movie palmares_type="popularity" />
   </div>
 
-
-  
-
 </template>
 
 <script>
@@ -59,25 +55,20 @@ import axios from "axios";
 import "vue3-carousel/dist/carousel.css";
 import Carousel_movie from "@/components/Carousel_movie.vue";
 import Genres from "@/components/Genres.vue";
-// import StarRating from 'vue-star-rating'
+import StarRating from "@/components/Rating.vue";
 
 export default {
   name: "Home",
-
-  //   components: {
-  //     Movie,
-  //     Carousel_movie,
-  //   },
   components: {
     Carousel_movie,
-    Genres, 
-    // StarRating
+    Genres,
+    StarRating,
   },
   data: function () {
     return {
       movieName: "",
       movie: {},
-      id: "",
+      id: ""
     };
   },
   methods: {
@@ -143,21 +134,6 @@ body {
 
 li {
   line-height: 1.5;
-}
-
-.custom-text {
-  font-weight: bold;
-  font-size: 1.9em;
-  border: 1px solid #cfcfcf;
-  padding-left: 10px;
-  padding-right: 10px;
-  border-radius: 5px;
-  color: #999;
-  background: #fff;
-}
-
-.review {
-  margin-left: 10px;
 }
 
 </style>
