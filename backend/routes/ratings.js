@@ -50,21 +50,35 @@ router.post("/:id", async function (req, res) {
     const movie = await MovieModel.findOne({ id_tmdb: req.params["id"] });
     if (movie != null) {
       console.log("movie._id=" + movie._id);
-      const rating = await RatingModel.findOne({
-        id_user: id_user,
-        id_movie: movie._id,
-      });
-      if (rating == null) {
-        const newRating = new RatingModel({
-          // Rating attributes
-          id_movie: movie._id,
+
+      const rating = await RatingModel.findOneAndUpdate(
+        {
           id_user: id_user,
+          id_movie: movie._id,
+        },
+        {
           rating: rate,
-        });
-        // Save the movie in database
-        const createdRating = await newRating.save();
-        res.send("" + rate);
-      }
+        },
+        {
+          upsert: true,
+        }
+      ).exec();
+
+      // const rating = await RatingModel.findOne({
+      //   id_user: id_user,
+      //   id_movie: movie._id,
+      // });
+      // if (rating == null) {
+      //   const newRating = new RatingModel({
+      //     // Rating attributes
+      //     id_movie: movie._id,
+      //     id_user: id_user,
+      //     rating: rate,
+      //   });
+      //   // Save the movie in database
+      //   const createdRating = await newRating.save();
+      //   res.send("" + rate);
+      // }
     } else {
       res.send("0");
     }
