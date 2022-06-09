@@ -10,7 +10,8 @@ async function fetchMoviesFromTheMovieDatabase() {
   //     `https://api.themoviedb.org/3/movie/popular?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&language=en-US&page=1`
   //   );
   let db_movies = [];
-  for (let i = 1; i < 2; i++) {
+  for (let i = 1; i < 20; i++) {
+    console.log(i);
     const results = await axios.get(
       `https://api.themoviedb.org/3/movie/now_playing?api_key=522d421671cf75c2cba341597d86403a&page=${i}`
     );
@@ -55,6 +56,7 @@ async function populateMovies(movies) {
       date: movie.release_date,
       genre: movie.genre_ids.map((genre) => genres[genre]),
       popularity: movie.popularity,
+      id_tmdb: movie.id,
       // runtime: movie.runtime,
     });
 
@@ -146,7 +148,9 @@ async function populate() {
   await connection.db.dropCollection("actors");
   await connection.db.dropCollection("castings");
   await connection.db.dropCollection("ratings");
-  await connection.db.dropCollection("scores");
+  try {
+    await connection.db.dropCollection("scores");
+  } catch (e) {}
 
   await populateMovies(movies);
 

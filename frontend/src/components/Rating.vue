@@ -1,15 +1,19 @@
 <template>
   <div id="app">
     <h2>Rating:</h2>
-    <StarRating></StarRating>
+    <StarRating :rating="rating" @update:rating="setRating"></StarRating>
   </div>
 </template>
 
 <script>
 import StarRating from "vue-star-rating";
+import axios from "axios";
 
 export default {
   name: "Rating",
+  props: {
+    movie: Array,
+  },
   components: {
     StarRating,
   },
@@ -22,6 +26,31 @@ export default {
     };
   },
   methods: {
+    fetchRating: function () {
+      axios
+        .get("http://localhost:3000/ratings/" + this.movie)
+        .then((response) => {
+          this.rating = response.data === "none" ? null : response.data;
+          console.log(this.rating);
+        })
+        .catch((error) => {
+          this.usersLoadingError = "An error occured while fetching users.";
+          console.error(error);
+        });
+    },
+    setRating: function (rating) {
+      axios
+        .post("http://localhost:3000/ratings/" + this.movie, { rating })
+        .then((response) => {
+          this.rating = response.data === "none" ? null : response.data;
+          console.log(this.rating);
+        })
+        .catch((error) => {
+          this.usersLoadingError = "An error occured while fetching users.";
+          console.error(error);
+        });
+    },
+
     showCurrentRating(rating) {
       this.currentSelectedRating =
         rating === 0
@@ -30,6 +59,7 @@ export default {
     },
     setCurrentSelectedRating(rating) {
       this.currentSelectedRating = "You have Selected: " + rating + " stars";
+      this.setRating(rating);
     },
   },
   computed: {
@@ -43,6 +73,11 @@ export default {
         ? "Click to select " + this.mouseOverRating + " stars"
         : "No Rating";
     },
+  },
+  created: function () {
+    this.id = this.$route.params.id;
+    console.log("movie id = " + this.id);
+    this.fetchRating();
   },
 };
 </script>

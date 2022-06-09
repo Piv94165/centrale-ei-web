@@ -21,6 +21,7 @@
     v-bind:increment="0.5"
     v-bind:maxRating="3"
     v-bind:starSize="90"
+    :movie="id"
   >
   </StarRating>
 

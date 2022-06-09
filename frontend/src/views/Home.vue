@@ -3,10 +3,10 @@
     <!-- <img alt="Vue logo" src="../assets/logo.png" /> -->
     <h1>Relax and Enjoy !</h1>
     <!-- <div class="titre_carousel">Your Suggestions</div> -->
+    <Carousel_movie palmares_type="nowplaying" />
     <Carousel_movie palmares_type="popularity" />
     <Carousel_movie palmares_type="upcoming" />
     <Carousel_movie palmares_type="toprated" />
-    <Carousel_movie palmares_type="nowplaying" />
     <input type="text" v-model="movieName" />
     <div>
       <span>Mon film: {{ movieName }}</span>
