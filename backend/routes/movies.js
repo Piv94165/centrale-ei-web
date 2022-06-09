@@ -5,7 +5,18 @@ module.exports = router;
 
 router.get("/", async function (req, res) {
   try {
-    const movies_list = await MovieModel.find({}).populate("viewers");
+    const movies_list = await MovieModel.find({});
+    console.log(movies_list);
+    res.json(movies_list);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+router.get("/genre/:genre", async function (req, res) {
+  try {
+    const genreName = req.params.genre
+    const movies_list = await MovieModel.find({genre: genreName});
     res.json(movies_list);
   } catch (error) {
     console.log(error);

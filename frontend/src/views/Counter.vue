@@ -2,70 +2,104 @@
   <h1>Filter</h1>
   <!-- <div class="counter-value">Counter value is: {{ counter }}</div> -->
   <!-- <button @click="increment()">Increment</button> -->
-  <div>
-    <div id="Search">
-      <div>
-        Search
-        <input class="search-input" placeholder="Search" />
+
+  <div id="Search">
+    <div style="text-align: right">
+      Search
+      <input class="search-input" placeholder="Search" />
+    </div>
+    <div class="Boutons">
+      <a
+        @click="selectGenre(genre.name)"
+        v-for="genre in genres"
+        href="#"
+        class="action-button"
+        :key="genre.id"
+      >
+        {{ genre.name }}
+      </a>
+    </div>
+    <div class="Images">
+      <div v-for="movie in movies" :key="movie._id">
+        {{ movie.title }}
+        <a :href="'#' + movie.id">
+          <img
+            :src="'https://image.tmdb.org/t/p/w200' + movie.poster_path"
+            :alt="movie.title"
+          />
+        </a>
       </div>
     </div>
-    <div>Types</div>
-    <div class="Genre">
-      <button>Action</button>
-      <button>Adventure</button>
-      <button>Animation</button>
-      <button>Comedy</button>
-      <button>Crime</button>
-      <button>Documentary</button>
-      <button>Drama</button>
-      <button>Family</button>
-      <button>Fantasy</button>
-      <button>History</button>
-      <button>Horror</button>
-      <button>Music</button>
-      <button>Mystery</button>
-      <button>Romance</button>
-      <button>Science Fiction</button>
-      <button>TV Movie</button>
-      <button>Thriller</button>
-      <button>War</button>
-      <button>Western</button>
-    </div>
   </div>
-  <router-view />
 </template>
 
 <style scoped>
-.Genre {
-  width: 100px;
-  margin: 5px;
-  height: 50px;
+.Boutons {
+  margin-top: 30px;
+  margin-left: 20px;
+  margin-right: 20px;
+  height: 10px;
   display: flex;
-  flex-direction: column;
-  row-gap: 10px;
-  column-gap: 20px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px 10px; /* row-gap column gap */
+}
+
+.action-button {
+  padding: 5px 5px;
+  float: left;
+  border-radius: 6px;
+  font-family: "Lobster";
+  font-size: 18px;
   text-align: center;
+  color: #ffffff;
+  text-decoration: none;
+  background-color: rgba(201, 157, 136, 255);
+  border-bottom: 2px solid rgba(161, 122, 118, 255);
+  text-shadow: 0px -1px rgba(161, 122, 118, 255);
+  transition: all 0.1s;
+  -webkit-transition: all 0.1s;
+}
+
+.action-button:active {
+  transform: translate(0px, 2px);
+  -webkit-transform: translate(0px, 2px);
+  border-bottom: 1px solid;
+}
+
+.Images {
+  height: 500px;
 }
 </style>
 
-<!-- <script>
+<script>
+import axios from "axios";
 export default {
-  name: "Counter",
+  name: "Genre",
   data: function () {
     return {
-      counter: 0,
+      genres: [],
+      movies: [],
     };
   },
   methods: {
-    increment: function () {
-      this.counter++;
+    fetchGenres: async function () {
+      const response = await axios.get(
+        "https://api.themoviedb.org/3/genre/movie/list?api_key=a0a7e40dc8162ed7e37aa2fc97db5654&language=en-US"
+      );
+      this.genres = response.data.genres;
+    },
+    selectGenre: async function (genre) {
+      const response = await axios.get(
+        "http://localhost:3000/movies/genre/" + genre
+      );
+      this.movies = response.data;
     },
   },
+  created() {
+    this.fetchGenres();
+  },
 };
-</script> -->
-
-<!-- <style scoped>
-.counter-value {
-  margin-bottom: 5px;
-}
-</style> -->
+</script>
