@@ -1,53 +1,43 @@
 <template>
-
-  <h1> {{ movie.title}}</h1>    
-    <div class ="image">
-      <a :href="'/onemovie/' + movie.id">
-        <img
+  <h1>{{ movie.title }}</h1>
+  <div class="image">
+    <a :href="'/onemovie/' + movie.id">
+      <img
         :src="'https://image.tmdb.org/t/p/w400' + movie.poster_path"
         :alt="movie.original_title"
-        />
+      />
       <!-- <p>
               {{movie.original_title}} ({{movie.release_date}})
           </p> -->
-      </a>
-    </div>
-
-    <div class ="special">
-    <p>
-      <h2> Vote Average: {{movie.vote_average}}/10 </h2>
-    </p>
-    </div>
-
-  <StarRating v-model:rating="rating"
-  v-bind:increment="0.5"
-             v-bind:maxRating="3"
-             v-bind:starSize="90">
-  </StarRating>
-
-    <p>
-      <h2>Release Date: {{movie.release_date}}</h2>
-    </p>
-
-    <p>
-      <h2> Overview: </h2> <li> {{movie.overview}} </li>
-    </p>
-
-    <p>
-      <h2> Original Language: {{movie.original_language}} </h2>
-    </p>
-
-    <p>
-      <h2> Genres: </h2>
-      <Genres :genres="movie.genres"></Genres>
-    </p>
-
-
-  <div class="recommandation">
-    <h2>The Recommend Movies: </h2>
-    <Carousel_movie palmares_type="popularity" />
+    </a>
   </div>
 
+  <div class="special">
+    <h2>Vote Average: {{ movie.vote_average }}/10</h2>
+  </div>
+
+  <StarRating
+    v-model:rating="rating"
+    v-bind:increment="0.5"
+    v-bind:maxRating="3"
+    v-bind:starSize="90"
+  >
+  </StarRating>
+
+  <h2>Release Date: {{ movie.release_date }}</h2>
+
+  <h2>Overview:</h2>
+  <li>{{ movie.overview }}</li>
+
+  <h2>Original Language: {{ movie.original_language }}</h2>
+
+  <h2>Genres:</h2>
+  <Genres :genres="movie.genres"></Genres>
+
+  <div class="recommandation">
+    <h2>The Recommend Movies:</h2>
+    <Carousel_movie palmares_type="popularity" />
+  </div>
 </template>
 
 <script>
@@ -68,7 +58,7 @@ export default {
     return {
       movieName: "",
       movie: {},
-      id: ""
+      id: "",
     };
   },
   methods: {
@@ -94,28 +84,25 @@ export default {
     this.fetchMovie();
   },
 };
-
-
-
 </script>
 
 <style scoped>
 .h1 {
-  color: rgb(234,168,163)
+  color: rgb(234, 168, 163);
 }
 
 body {
   width: 90%;
   max-width: 900px;
   margin: 0 auto;
-  font: .9em/1.2 Arial, Helvetica, sans-serif;
-  font-family: 'Raleway', sans-serif;
+  font: 0.9em/1.2 Arial, Helvetica, sans-serif;
+  font-family: "Raleway", sans-serif;
 }
 
 .special {
-  background-color: rgb(246,230,231);
+  background-color: rgb(246, 230, 231);
   padding: 10px;
-  color: rgb(234,168,163);
+  color: rgb(234, 168, 163);
 }
 
 .image {
@@ -124,7 +111,7 @@ body {
   width: 400px;
   height: 500 px;
   border-radius: 5px;
-  background-color: rgb(234,168,163);
+  background-color: rgb(234, 168, 163);
   padding: 1em;
 }
 
@@ -135,5 +122,4 @@ body {
 li {
   line-height: 1.5;
 }
-
 </style>

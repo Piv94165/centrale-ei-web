@@ -37,6 +37,7 @@
   --logo_size: auto;
   --pp_size: auto;
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
   background: rgba(201, 157, 136, 255);
 }
@@ -45,8 +46,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  width: calc(100% - var(--logo_size) - var(--pp_size));
+  justify-content: center;
+  /* width: calc(100% - var(--logo_size) - var(--pp_size)); */
+  width: 1020px;
   margin-top: 10px;
   font-size: 30pt;
 }
@@ -76,10 +78,11 @@
 .logo {
   width: var(--logo_size);
   margin-left: 10px;
+  margin-top: 5px;
 }
 
 .pp {
-  width: var(--pp_size);
+  /* width: var(--pp_size); */
   margin: 10px;
   justify-self: flex-end;
 }
