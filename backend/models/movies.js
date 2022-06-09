@@ -6,7 +6,7 @@ const MovieSchema = new mongoose.Schema({
   url: { type: String },
   viewers: [{ type: mongoose.Schema.Types.ObjectId, ref: "UserModel" }],
   date: { type: String },
-  genre: [{ type: Array }],
+  genre: [{ type: String }],
   popularity: { type: String },
   runtime: { type: String },
 });
