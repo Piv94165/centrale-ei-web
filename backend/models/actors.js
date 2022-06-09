@@ -6,6 +6,6 @@ const ActorsSchema = new mongoose.Schema({
   profile_path: { type: String },
 });
 
-const ActorsModel = mongoose.model("ActorsModel", ActorsSchema, "actorss");
+const ActorsModel = mongoose.model("ActorsModel", ActorsSchema, "actors");
 
 module.exports = ActorsModel;
