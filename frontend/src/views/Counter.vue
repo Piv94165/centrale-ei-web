@@ -9,25 +9,24 @@
       <input class="search-input" placeholder="Search" />
     </div>
     <div class="Boutons">
-      <a
+      <div
         @click="selectGenre(genre.name)"
         v-for="genre in genres"
-        href="#"
         class="action-button"
         :key="genre.id"
       >
         {{ genre.name }}
-      </a>
+      </div>
     </div>
     <div class="Images">
       <div v-for="movie in movies" :key="movie._id">
         {{ movie.title }}
-        <a :href="'#' + movie.id">
+        <router-link :to="/onemovie/ + movie._id">
           <img
-            :src="'https://image.tmdb.org/t/p/w200' + movie.poster_path"
+            :src="'https://image.tmdb.org/t/p/w200' + movie.url"
             :alt="movie.title"
           />
-        </a>
+        </router-link>
       </div>
     </div>
   </div>
@@ -38,7 +37,6 @@
   margin-top: 30px;
   margin-left: 20px;
   margin-right: 20px;
-  height: 10px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -48,6 +46,7 @@
 }
 
 .action-button {
+  cursor: pointer;
   padding: 5px 5px;
   float: left;
   border-radius: 6px;
