@@ -126,6 +126,12 @@ export default {
           console.error(error);
         });
     },
+    FectchRecom: async function () {
+      const response = await axios.get(
+        "http://localhost:3000/movies/genre/" + genre
+      );
+      this.movies = response.data;
+    },
   },
 
   created: function () {
