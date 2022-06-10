@@ -25,7 +25,7 @@
         <!-- {{ movie.title }} -->
         <router-link :to="/onemovie/ + movie._id">
           <img
-            :src="'https://image.tmdb.org/t/p/w200' + movie.url"
+            :src="'https://image.tmdb.org/t/p/w200' + movie.poster_path"
             :alt="movie.title"
           />
         </router-link>

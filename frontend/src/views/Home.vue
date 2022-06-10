@@ -8,7 +8,7 @@
     <Carousel_movie palmares_type="popularity" />
     <Carousel_movie palmares_type="upcoming" />
     <Carousel_movie palmares_type="toprated" />
-    <input type="text" v-model="movieName" />
+    <!-- <input type="text" v-model="movieName" />
     <div>
       <span>Mon film: {{ movieName }}</span>
     </div>
@@ -19,7 +19,7 @@
     </ul>
     <div class="grid">
       <Movie v-for="movie in movies" v-bind:key="movie.id" :movie="movie" />
-    </div>
+    </div> -->
     <!-- <p>
       For a guide and recipes on how to configure / customize this project,<br />
       check out the

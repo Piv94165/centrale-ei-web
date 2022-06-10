@@ -16,7 +16,7 @@
   </div>
 
   <div class="special">
-    <h2>Vote Average: {{ movie.vote_average }}/10</h2>
+    <h2>Average Rating: {{ movie.vote_average }}/10</h2>
   </div>
 
   <StarRating
@@ -39,7 +39,7 @@
   <Genres :genres="movie.genres"></Genres>
 
   <div class="recommandation">
-    <h2>The Recommend Movies:</h2>
+    <h2>Recommended Movies:</h2>
     <Carousel_movie palmares_type="popularity" />
   </div>
 </template>

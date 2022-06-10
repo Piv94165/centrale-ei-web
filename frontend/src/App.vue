@@ -13,8 +13,8 @@
         <div class="nav">
           <router-link class="nav-link" to="/">Home</router-link>
           <router-link class="nav-link" to="/counter">Movies</router-link>
-          <router-link class="nav-link" to="/users">Preferences</router-link>
-          <router-link class="nav-link" to="/about">About</router-link>
+          <!-- <router-link class="nav-link" to="/users">Preferences</router-link>
+          <router-link class="nav-link" to="/about">About</router-link> -->
         </div>
       </div>
       <img
@@ -34,11 +34,11 @@
 @import url(//fonts.googleapis.com/css?family=Pacifico);
 
 .banniere {
-  --logo_size: auto;
-  --pp_size: auto;
+  --logo_size: 8%;
+  --pp_size: 8%;
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   background: rgba(201, 157, 136, 255);
 }
 
@@ -47,8 +47,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* width: calc(100% - var(--logo_size) - var(--pp_size)); */
-  width: 1020px;
+  width: calc(100% - var(--logo_size) - var(--pp_size));
   margin-top: 10px;
   font-size: 30pt;
 }
@@ -82,8 +81,8 @@
 }
 
 .pp {
-  /* width: var(--pp_size); */
-  margin: 10px;
-  justify-self: flex-end;
+  width: var(--pp_size);
+  margin: 5px;
+  justify-self: right;
 }
 </style>

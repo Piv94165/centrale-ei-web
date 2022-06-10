@@ -3,7 +3,7 @@
     <div class="titre_carousel">{{ title }}</div>
     <div class="stylee">
       <Carousel
-        :itemsToShow="5.95"
+        :itemsToShow="4.95"
         :wrapAround="true"
         paginationColor="gray"
         paginationActiveColor="red"
