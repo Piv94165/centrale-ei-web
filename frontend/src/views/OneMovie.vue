@@ -1,5 +1,8 @@
 <template>
-  <h1>{{ movie.title }}</h1>
+  <div class="title">
+    <h1>{{ movie.title }}</h1>
+  </div>
+
   <div class="image">
     <a :href="'/onemovie/' + movie.id">
       <img
@@ -88,8 +91,10 @@ export default {
 </script>
 
 <style scoped>
-.h1 {
-  color: rgb(234, 168, 163);
+.title {
+  color: rgb(207, 139, 135);
+  position: relative;
+  left: 20px;
 }
 
 body {
