@@ -1,12 +1,14 @@
 <template>
-  <h1>Filter</h1>
-  <!-- <div class="counter-value">Counter value is: {{ counter }}</div> -->
-  <!-- <button @click="increment()">Increment</button> -->
+  <body>
+    <h1>Filter</h1>
+    <!-- <div class="counter-value">Counter value is: {{ counter }}</div> -->
+    <!-- <button @click="increment()">Increment</button> -->
 
-  <div id="Search">
-    <div style="text-align: right">
-      Search
-      <input class="search-input" placeholder="Search" />
+    <div id="Search">
+      <div style="text-align: right">
+        Search
+        <input class="search-input" placeholder="Search" />
+      </div>
     </div>
     <div class="Boutons">
       <div
@@ -18,9 +20,9 @@
         {{ genre.name }}
       </div>
     </div>
-    <div class="Images">
+    <div class="grid">
       <div v-for="movie in movies" :key="movie._id">
-        {{ movie.title }}
+        <!-- {{ movie.title }} -->
         <router-link :to="/onemovie/ + movie._id">
           <img
             :src="'https://image.tmdb.org/t/p/w200' + movie.url"
@@ -29,10 +31,26 @@
         </router-link>
       </div>
     </div>
-  </div>
+  </body>
+  <!-- <div class="Images">
+    <div v-for="movie in movies" :key="movie._id">
+      {{ movie.title }}
+      <router-link :to="/onemovie/ + movie._id">
+        <img
+          :src="'https://image.tmdb.org/t/p/w200' + movie.url"
+          :alt="movie.title"
+        />
+      </router-link>
+    </div> -->
+  <!-- </div> -->
 </template>
 
 <style scoped>
+.body {
+  color: rgb(234, 168, 163);
+  height: 1000px;
+}
+
 .Boutons {
   margin-top: 30px;
   margin-left: 20px;
@@ -70,6 +88,17 @@
 
 .Images {
   height: 500px;
+  position: relative;
+}
+
+.grid {
+  margin-top: 20px;
+  margin-left: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  /* height: 1000px; */
 }
 </style>
 
