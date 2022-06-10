@@ -13,10 +13,68 @@ router.get("/", async function (req, res) {
   }
 });
 
+router.get("/popularity", async function (req, res) {
+  try {
+    const movies_list = await MovieModel.find({});
+    const popularity_list = [];
+    for (const movie of movies_list) {
+      popularity_list.push({ popularity: movie.popularity, movie: movie });
+    }
+    const orderedlist = popularity_list.sort(function (a, b) {
+      return a.popularity > b.popularity
+        ? -1
+        : a.popularity == b.popularity
+        ? 0
+        : 1;
+    });
+    let popular_movies = [];
+    let count = 0;
+    for (const movie of orderedlist) {
+      if (count < 20) {
+        popular_movies.push(movie);
+        count = count + 1;
+      }
+    }
+    console.log(movies_list);
+    res.json(movies_list);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+router.get("/toprated", async function (req, res) {
+  try {
+    const movies_list = await MovieModel.find({});
+    const toprated_list = [];
+    for (const movie of movies_list) {
+      toprated_list.push({ vote_average: movie.vote_average, movie: movie });
+    }
+    const orderedlist = toprated_list.sort(function (a, b) {
+      return a.vote_average > b.vote_average
+        ? -1
+        : a.vote_average == b.vote_average
+        ? 0
+        : 1;
+    });
+    let toprated_movies = [];
+    let count = 0;
+    for (const movie of orderedlist) {
+      if (count < 20) {
+        toprated_movies.push(movie);
+        count = count + 1;
+      }
+    }
+    console.log(movies_list);
+    res.json(movies_list);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 router.get("/genre/:genre", async function (req, res) {
   try {
-    const genreName = req.params.genre
-    const movies_list = await MovieModel.find({genre: genreName});
+    const genreName = req.params.genre;
+    const movies_list = await MovieModel.find({ genre: genreName });
     res.json(movies_list);
   } catch (error) {
     console.log(error);
@@ -24,7 +82,6 @@ router.get("/genre/:genre", async function (req, res) {
 });
 
 router.post("/new", async function (req, res) {
-  // Your code !
   // Create a new movie instance
   try {
     const newMovie = new MovieModel({
@@ -42,7 +99,6 @@ router.post("/new", async function (req, res) {
     const createdMovie = await newMovie.save();
     res.send(createdMovie);
   } catch (error) {
-    // What to do if there was an error !
     console.error(error);
     if (error.code === 11000) {
       res.status(400).json({
