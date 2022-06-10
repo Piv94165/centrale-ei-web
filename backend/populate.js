@@ -51,12 +51,13 @@ async function populateMovies(movies) {
       // Movie attributes
       title: movie.title,
       description: movie.overview,
-      url: movie.poster_path,
+      poster_path: movie.poster_path,
       viewers: movie.viewers,
       date: movie.release_date,
       genre: movie.genre_ids.map((genre) => genres[genre]),
       popularity: movie.popularity,
       id_tmdb: movie.id,
+      vote_average: movie.vote_average,
       // runtime: movie.runtime,
     });
 
@@ -144,13 +145,13 @@ async function populate() {
   const client = await mongoose.connect(process.env.MONGO_DB_URL);
   const movies = await fetchMoviesFromTheMovieDatabase();
   const connection = mongoose.connection;
-  await connection.db.dropCollection("movies");
-  await connection.db.dropCollection("actors");
-  await connection.db.dropCollection("castings");
-  await connection.db.dropCollection("ratings");
-  try {
-    await connection.db.dropCollection("scores");
-  } catch (e) {}
+  // await connection.db.dropCollection("movies");
+  // await connection.db.dropCollection("actors");
+  // await connection.db.dropCollection("castings");
+  // await connection.db.dropCollection("ratings");
+  // try {
+  //   await connection.db.dropCollection("scores");
+  // } catch (e) {}
 
   await populateMovies(movies);
 

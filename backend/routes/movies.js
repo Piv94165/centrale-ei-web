@@ -15,8 +15,8 @@ router.get("/", async function (req, res) {
 
 router.get("/genre/:genre", async function (req, res) {
   try {
-    const genreName = req.params.genre
-    const movies_list = await MovieModel.find({genre: genreName});
+    const genreName = req.params.genre;
+    const movies_list = await MovieModel.find({ genre: genreName });
     res.json(movies_list);
   } catch (error) {
     console.log(error);
@@ -31,12 +31,13 @@ router.post("/new", async function (req, res) {
       // Movie attributes
       title: req.body.title,
       description: req.body.description,
-      url: req.body.url,
+      poster_path: req.body.url,
       viewers: req.body.viewers,
       date: req.body.date,
       genre: req.body.genre,
       popularity: req.body.popularity,
       runtime: req.body.runtime,
+      vote_average: req.body.vote_average,
     });
     // Save the movie in database
     const createdMovie = await newMovie.save();

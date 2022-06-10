@@ -74,23 +74,44 @@ export default {
           url =
             "https://api.themoviedb.org/3/movie/now_playing?api_key=522d421671cf75c2cba341597d86403a&language=en-US&page=1";
           break;
+        case "recommandation":
+          this.title = "For you";
+          url = "http://localhost:3000/scores/";
+          break;
         default:
       }
-      axios
-        .get(url)
-        .then((response) => {
-          this.movies = response.data.results;
-          console.log(this.movies[0]);
-        })
-        .catch((error) => {
-          this.usersLoadingError = "An error occured while fetching users.";
-          console.error(error);
-        });
+      if (this.palmares_type === "recommandation") {
+        console.log("houhoububybyu");
+        axios
+          .get(url)
+          .then((response) => {
+            this.movies = response.data;
+            console.log(this.movies[0]);
+            console.log(this.movies[0].url);
+            console.log("url : ");
+          })
+          .catch((error) => {
+            this.usersLoadingError = "An error occured while fetching users.";
+            console.error(error);
+          });
+      } else {
+        axios
+          .get(url)
+          .then((response) => {
+            this.movies = response.data.results;
+          })
+          .catch((error) => {
+            this.usersLoadingError = "An error occured while fetching users.";
+            console.error(error);
+          });
+      }
     },
   },
   created: function () {
     console.log(this.palmares_type);
     this.fetchMovies();
+    console.log("hellooooooooooooo");
+    console.log(this.movies);
   },
 };
 </script>

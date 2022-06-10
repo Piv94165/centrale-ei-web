@@ -20,7 +20,7 @@ router.get("/", async function (req, res) {
     for (const s of score) {
       scores_list.push({ score: s.score, id_movie: s.id_movie });
     }
-    console.log("score : " + scores_list);
+    // console.log("score : " + scores_list);
     // var mylist = [
     //   [1, "c"],
     //   [3, "a"],
@@ -38,6 +38,7 @@ router.get("/", async function (req, res) {
         count = count + 1;
       }
     }
+    console.log(best_movies);
     // const orderedlist = scores_list.sort(function (a, b) {
     //   return a[1].localeCompare(b[1]);
     // });
