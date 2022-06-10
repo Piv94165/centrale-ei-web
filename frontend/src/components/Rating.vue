@@ -1,7 +1,13 @@
 <template>
   <div id="app">
     <h2>Rating:</h2>
-    <StarRating :rating="rating" @update:rating="setRating"></StarRating>
+    <StarRating
+      :rating="rating"
+      @update:rating="setRating"
+      :starSize="50"
+      inactiveColor="rgb(252,242,242)"
+      activeColor="rgb(234,168,163)"
+    ></StarRating>
   </div>
 </template>
 
@@ -19,6 +25,7 @@ export default {
   },
   data: function () {
     return {
+      // Valeur à récupérer
       rating: null,
       resetableRating: 2,
       currentRating: "No Rating",

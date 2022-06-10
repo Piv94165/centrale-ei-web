@@ -1,19 +1,27 @@
 <template>
   <div>
     <div class="titre_carousel">{{ title }}</div>
-    <Carousel :itemsToShow="5.95" :wrapAround="true">
-      <!-- <slide v-for="slide in 10" :key="slide">
+    <div class="stylee">
+      <Carousel
+        :itemsToShow="5.95"
+        :wrapAround="true"
+        paginationColor="gray"
+        paginationActiveColor="red"
+        navigationColor="gray"
+      >
+        <!-- <slide v-for="slide in 10" :key="slide">
           {{ slide }} -->
-      <Slide v-for="movie in movies" v-bind:key="movie.id">
-        <!-- {{movie.original_title}} -->
-        <Movie class="carousel__item" :movie="movie" />
-      </Slide>
+        <Slide v-for="movie in movies" v-bind:key="movie.id">
+          <!-- {{movie.original_title}} -->
+          <Movie class="carousel__item" :movie="movie" />
+        </Slide>
 
-      <template #addons>
-        <Navigation />
-        <Pagination />
-      </template>
-    </Carousel>
+        <template #addons>
+          <Navigation color />
+          <Pagination />
+        </template>
+      </Carousel>
+    </div>
   </div>
 </template>
 
@@ -99,12 +107,14 @@ export default {
 }
 .carousel__slide--next > .carousel__item {
   transform: scale(0.9) translate(-10px);
+  border: 10px solid white;
 }
 .carousel__slide--prev > .carousel__item {
   transform: scale(0.9) translate(10px);
+  border: 10px solid white;
 }
 .carousel__slide--active > .carousel__item {
-  transform: scale(1);
+  transform: scale(1.2);
 }
 
 .titre_carousel {
