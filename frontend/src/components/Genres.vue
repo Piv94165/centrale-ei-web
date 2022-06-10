@@ -22,6 +22,8 @@ export default {
 <style scoped>
 li {
   line-height: 1.5;
+     position: relative;
+     left:17px;
 }
 
 /* p{
