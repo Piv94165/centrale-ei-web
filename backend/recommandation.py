@@ -180,7 +180,7 @@ def find_ratings_of_a_user(id_user):
     
     # On stocke dans la base de données les 20 meilleurs scores
     for i in range(20):
-        x = myscores.update_one({"id_movie": ordered_movies[-1*i], "id_user": id_user}, {"$set":{"id_movie": ordered_movies[-1*i], "id_user": id_user, "score": str(float(ordered_scores[-1 * i]))}}, True)
+        x = myscores.update_one({"id_movie": ordered_movies[-1*i], "id_user": ObjectId(id_user)}, {"$set":{"id_movie": ordered_movies[-1*i], "id_user": ObjectId(id_user), "score": str(float(ordered_scores[-1 * i]))}}, True)
         print(x)
 
     # for movie in user_ratings:
