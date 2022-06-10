@@ -54,52 +54,8 @@ def term_movie_incidence_matrix (Movies,Castings,terms):
                 term_movie_matrix[(i,j)] = 1
                 count+=1
             i+=1
-        # movie_genres_actors = set()
-        # movie_casting = Castings.find({"id_movie" : movie})
-        # #les acteurs sont classés par "ordre d'importance" donc on prend les 10 premiers
-        # for genre in Movies[movie]:
-        #     movie_genres_actors.add(genre[0])
-        # l=0
-        # for actor in movie_casting:
-        #     # print(l)
-        #     if l<10:
-        #         movie_genres_actors.add(actor["id_actor"])
-        #         l+=1
-        #     else:
-        #         break
-        # if terms[j] in movie_genres_actors: 
-        #     term_movie_matrix[(i,j)] = 1
-        # i+=1
+
     return term_movie_matrix 
-
-# def term_movie_incidence_matrix (Movies,Castings,terms):
-#     #Movies : dico {id_movie : [terms]}
-#     #terms : liste [terms]
-#     n_movies = len(Movies.keys()) 
-#     n_terms = len(terms)
-#     term_movie_matrix = np.zeros((n_movies,n_terms))
-#     for j in range(n_terms):
-#         i=0
-#         for movie in Movies:
-#             movie_genres_actors = []
-#             movie_casting = Castings.find({"id_movie" : movie})
-#             #les acteurs sont classés par "ordre d'importance" donc on prend les 10 premiers
-#             l=0
-#             for actor in movie_casting:
-#                 print(l)
-#                 if l<10:
-#                     movie_genres_actors.append(actor["id_actor"])
-#                     l+=1
-#                 else:
-#                     break
-
-#             for genre in Movies[movie]:
-#                 movie_genres_actors.append(genre[0])
-#             if terms[j] in movie_genres_actors: 
-#                 term_movie_matrix[(i,j)] = 1
-#             i+=1
-#     print(term_movie_matrix)
-#     return term_movie_matrix 
 
 
 def user_mean_vector(ratings_user, Movies, Castings, terms):
